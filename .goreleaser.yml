@@ -18,10 +18,10 @@ builds:
     main: ./
     binary: memcached-operator
     mod_timestamp: "{{ .CommitTimestamp }}"
-    asmflags: &build-asmflags
-      - all=-trimpath={{ .Env.PWD }}
-    gcflags: &build-gcflags
-      - all=-trimpath={{ .Env.PWD }}
+    # asmflags: &build-asmflags
+    #   - all=-trimpath={{ .Env.PWD }}
+    # gcflags: &build-gcflags
+    #   - all=-trimpath={{ .Env.PWD }}
     ldflags: &build-ldflags
       - -X {{ .Env.REPO }}/internal/version.Version={{ .Env.SIMPLE_VERSION }}
       - -X {{ .Env.REPO }}/internal/version.GitVersion={{ .Env.GIT_VERSION }}
