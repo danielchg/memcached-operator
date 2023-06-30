@@ -18,16 +18,16 @@ builds:
     main: ./
     binary: memcached-operator
     mod_timestamp: "{{ .CommitTimestamp }}"
-    asmflags: &build-asmflags
-      - all=-trimpath={{ .Env.PWD }}
-    gcflags: &build-gcflags
-      - all=-trimpath={{ .Env.PWD }}
-    ldflags: &build-ldflags
-      - -X {{ .Env.REPO }}/internal/version.Version={{ .Env.SIMPLE_VERSION }}
-      - -X {{ .Env.REPO }}/internal/version.GitVersion={{ .Env.GIT_VERSION }}
-      - -X {{ .Env.REPO }}/internal/version.GitCommit={{ .Env.GIT_COMMIT }}
-      - -X {{ .Env.REPO }}/internal/version.KubernetesVersion={{ .Env.K8S_VERSION }}
-      - -X {{ .Env.REPO }}/internal/version.ImageVersion={{ .Env.IMAGE_VERSION }}
+    # asmflags: &build-asmflags
+    #   - all=-trimpath={{ .Env.PWD }}
+    # gcflags: &build-gcflags
+    #   - all=-trimpath={{ .Env.PWD }}
+    # ldflags: &build-ldflags
+    #   - -X {{ .Env.REPO }}/internal/version.Version={{ .Env.SIMPLE_VERSION }}
+    #   - -X {{ .Env.REPO }}/internal/version.GitVersion={{ .Env.GIT_VERSION }}
+    #   - -X {{ .Env.REPO }}/internal/version.GitCommit={{ .Env.GIT_COMMIT }}
+    #   - -X {{ .Env.REPO }}/internal/version.KubernetesVersion={{ .Env.K8S_VERSION }}
+    #   - -X {{ .Env.REPO }}/internal/version.ImageVersion={{ .Env.IMAGE_VERSION }}
     targets: &build-targets
       - linux_amd64
       - linux_arm64
@@ -45,11 +45,11 @@ checksum:
   name_template: "checksums.txt"
 
 # Sign the checksum file with the CI GPG key.
-signs:
-  - signature: "${artifact}.asc"
-    artifacts: checksum
-    # Use the CI signing subkey A20B5C7E decrypted into .ci/gpg/keyring to sign the release.
-    args: ["--home", ".ci/gpg/keyring", "-u", "A20B5C7E", "--output", "${signature}", "--detach-sign", "${artifact}"]
+# signs:
+#   - signature: "${artifact}.asc"
+#     artifacts: checksum
+#     # Use the CI signing subkey A20B5C7E decrypted into .ci/gpg/keyring to sign the release.
+#     args: ["--home", ".ci/gpg/keyring", "-u", "A20B5C7E", "--output", "${signature}", "--detach-sign", "${artifact}"]
 
 # We use a custom changelog generator.
 # changelog:
